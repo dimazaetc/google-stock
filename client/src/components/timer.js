@@ -35,7 +35,8 @@ const Timer = () => {
           Accept
         </Button>
       </InputGroup>
-      <div>{}</div>
+      
+
     </div>
   );
 };
