@@ -1,6 +1,5 @@
 import { GET_ALL_TIKERS, GET_CART, GET_TICKERS_LOADER } from "./const";
-
-import { socket } from "./GetSocket";
+import { socket } from "./getSocket";
 
 export const getToCart = (selectTicker) => ({
   type: GET_CART,
@@ -22,5 +21,7 @@ export const getTickersData = (tickersData) => ({
 export const getTickers = () =>
   function (dispatch) {
     dispatch(getTickersLoader());
-    socket.on("ticker", (response) => dispatch(getTickersData(response)));
+    socket.on("ticker", (response) => {
+      dispatch(getTickersData(response));
+    });
   };

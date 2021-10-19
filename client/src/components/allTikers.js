@@ -3,8 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { Container, Col, Row, Button } from "react-bootstrap";
 import { getTickers, getToCart } from "../redux/actions";
 import PropTypes from "prop-types";
-
+import Timer from "./timer";
+import onDelete from "./onDelete";
 import toggleColor from "./toggleColor";
+
 import heart from "../components/componentsImg/heart.png";
 import Loader from "./loader";
 import Healper from "./healper";
@@ -12,9 +14,9 @@ import "../index.css";
 
 function AllTikers() {
   const tikersWrapper = useSelector((state) => state.tickers.tickers);
-  const SelectedTickets = useSelector((state) => state.cart.cart);
+  const selectedTickets = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
-  const allList = tikersWrapper.tickersData;
+  let allList = tikersWrapper.tickersData;
   const [tickersList, setTickersList] = useState(allList);
   let tikersWrappers = document.querySelectorAll(
     ".tickers_box > .tikers_wrapper"
@@ -35,24 +37,24 @@ function AllTikers() {
     const result = select.find((ticker) => ticker.ticker === item.ticker);
     result ? setSelect([...select]) : setSelect([...select, item]);
   };
-  const onDelete = (item, index) => {
-    const newArray = [...select.slice(0, index), ...select.slice(index + 1)];
-    setSelect(newArray);
-  };
+
   useEffect(() => {
     dispatch(getToCart(select));
   }, [dispatch, select]);
   const listItemCart =
-    SelectedTickets == null ? (
+    selectedTickets == null ? (
       <Loader />
     ) : (
-      SelectedTickets.map((cart, index) => {
+      selectedTickets.map((cart, index) => {
         return (
           <div className="cart_wrapper" key={cart.ticker}>
             <div className="wishlist_ticker">
               {index + 1}.{cart.ticker}({cart.exchange})
             </div>
-            <Button onClick={() => onDelete(cart, index)} variant="danger">
+            <Button
+              onClick={() => onDelete(cart, index, select, setSelect)}
+              variant="danger"
+            >
               Delete
             </Button>
           </div>
@@ -84,7 +86,7 @@ function AllTikers() {
         );
       })
     );
-  console.log(allList);
+
   return (
     <Container className="all_tickers">
       <Row>
@@ -112,6 +114,7 @@ function AllTikers() {
             <span className="green">l</span>
             <span className="red">e</span> Finance
           </h2>
+          <Timer />
 
           <div className="tickers_box">{listItem}</div>
         </Col>

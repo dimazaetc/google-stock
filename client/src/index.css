@@ -94,8 +94,8 @@ h1 {
 }
 
 .load {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   margin: 0 auto;
 }
 .load hr {
@@ -222,4 +222,57 @@ h1 {
 }
 .btn.btn-danger {
   margin-left: 10px;
+}
+.nothing,
+.error,
+.success {
+  position: relative;
+}
+.nothing::before,
+.error::before {
+  position: absolute;
+  z-index: 12;
+  background-color: rgb(97, 2, 2);
+  color: white;
+  padding: 3px 5px;
+  top: 40px;
+  left: 10%;
+  border-radius: 10px;
+}
+.nothing::after,
+.error::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  top: 21px;
+  border: 10px solid transparent;
+  border-bottom: 10px solid rgb(97, 2, 2);
+}
+.nothing::before {
+  content: "Enter something";
+}
+.error::before {
+  content: "Enter the number";
+}
+.success::before {
+  content: "Success!";
+  position: absolute;
+  z-index: 12;
+  background-color: rgb(40, 138, 23);
+  color: white;
+  padding: 3px 5px;
+  top: 40px;
+  left: 10%;
+  border-radius: 10px;
+}
+.success::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  top: 21px;
+  border: 10px solid transparent;
+  border-bottom: 10px solid rgb(40, 138, 23);
+}
+#timer {
+  margin-bottom: 40px;
 }
