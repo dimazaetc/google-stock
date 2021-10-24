@@ -1,0 +1,23 @@
+.info_wishlist {
+  text-align: center;
+  color: grey;
+}
+.heart {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+}
+.title_heart_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cart_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Параметры тени */
+  margin: 5px 0;
+  padding: 7px;
+  padding-right: 25px;
+}

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Container, Col, Row, Button } from "react-bootstrap";
-import { getTickers, getToCart } from "../redux/actions";
+import { Container, Col, Row } from "react-bootstrap";
+import { getTickers, getToCart } from "../../redux/actions/actions";
 import PropTypes from "prop-types";
-import Timer from "./timer";
-import onDelete from "./onDelete";
-import toggleColor from "./toggleColor";
-
-import heart from "../components/componentsImg/heart.png";
-import Loader from "./loader";
-import Healper from "./healper";
-import "../index.css";
+import Timer from "../timer";
+import onDelete from "../functions/onDelete";
+import toggleColor from "../functions/toggleColor";
+import TickerItem from "../ticker-item";
+import WishlistItem from "../wishlist-item";
+import Heart from "./heart.png";
+import Loader from "../loader";
+import "./all-tickers.css";
 
 function AllTikers() {
   const tikersWrapper = useSelector((state) => state.tickers.tickers);
@@ -21,6 +21,11 @@ function AllTikers() {
   let tikersWrappers = document.querySelectorAll(
     ".tickers_box > .tikers_wrapper"
   );
+  let wishlistWrapperColors = document.querySelectorAll(
+    ".wishlist_wrapper_colors > .cart_wrapper"
+  );
+
+  const [select, setSelect] = useState([]);
 
   useEffect(() => {
     dispatch(getTickers());
@@ -28,36 +33,45 @@ function AllTikers() {
 
   useEffect(() => {
     setTickersList(allList);
+
     tickersList && toggleColor(allList, tikersWrappers, tickersList);
   }, [allList]); // eslint-disable-line
 
-  const [select, setSelect] = useState([]);
+  useEffect(() => {
+    const res = [];
+    for (let i = 0; i < select.length; i++) {
+      const result = allList.filter((item) => item.ticker === select[i].ticker);
+      res.push(...result);
+      toggleColor(res, wishlistWrapperColors, select);
+    }
 
-  const selectCart = (item, index) => {
+    setSelect(res);
+  }, [tickersList]); // eslint-disable-line
+  const selectCart = (item) => {
     const result = select.find((ticker) => ticker.ticker === item.ticker);
+
     result ? setSelect([...select]) : setSelect([...select, item]);
   };
 
   useEffect(() => {
     dispatch(getToCart(select));
   }, [dispatch, select]);
+
   const listItemCart =
     selectedTickets == null ? (
       <Loader />
     ) : (
       selectedTickets.map((cart, index) => {
+        const { ticker, exchange, price } = cart;
         return (
-          <div className="cart_wrapper" key={cart.ticker}>
-            <div className="wishlist_ticker">
-              {index + 1}.{cart.ticker}({cart.exchange})
-            </div>
-            <Button
-              onClick={() => onDelete(cart, index, select, setSelect)}
-              variant="danger"
-            >
-              Delete
-            </Button>
-          </div>
+          <WishlistItem
+            key={ticker}
+            ticker={ticker}
+            price={price}
+            index={index}
+            exchange={exchange}
+            onClick={() => onDelete(cart, index, select, setSelect)}
+          />
         );
       })
     );
@@ -66,23 +80,17 @@ function AllTikers() {
     tickersList == null ? (
       <Loader />
     ) : (
-      tickersList.map((tick, index) => {
+      tickersList.map((tick) => {
         const { ticker, price, change, change_percent } = tick;
         return (
-          <div
-            onDoubleClick={() => selectCart(tick, index)}
-            name={ticker}
-            className="tikers_wrapper"
+          <TickerItem
+            onDoubleClick={() => selectCart(tick)}
+            ticker={ticker}
+            price={price}
+            change={change}
+            change_percent={change_percent}
             key={ticker}
-          >
-            <div>
-              <Healper name={ticker} />
-            </div>
-            <div>{price}</div>
-            <div>
-              {change}/{change_percent}%
-            </div>
-          </div>
+          />
         );
       })
     );
@@ -93,7 +101,7 @@ function AllTikers() {
         <Col>
           <div className="title_heart_wrapper">
             <h2> My Wishlist</h2>
-            <img className="heart" src={heart} alt="heart" />
+            <img className="heart" src={Heart} alt="heart" />
           </div>
           <div className="cart_item_wrapper">
             {listItemCart.length === 0 ? (
@@ -101,7 +109,7 @@ function AllTikers() {
                 Add item to wishlist by double click
               </h3>
             ) : (
-              listItemCart
+              <div className="wishlist_wrapper_colors">{listItemCart}</div>
             )}
           </div>
         </Col>

@@ -1,4 +1,4 @@
-import { GET_ALL_TIKERS, GET_TICKERS_LOADER } from "./const";
+import { GET_ALL_TIKERS, GET_TICKERS_LOADER } from "../const";
 const initialState = {
   tickers: [],
   isLoading: true,

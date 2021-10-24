@@ -1,11 +1,5 @@
-import { GET_ALL_TIKERS, GET_CART, GET_TICKERS_LOADER } from "./const";
-import { socket } from "./getSocket";
-
-export const getToCart = (selectTicker) => ({
-  type: GET_CART,
-  payload: selectTicker,
-});
-
+import { GET_ALL_TIKERS, GET_CART, GET_TICKERS_LOADER } from "../const";
+import { socket } from "../get-socket";
 export const getTickersLoader = () => ({
   type: GET_TICKERS_LOADER,
   payload: {
@@ -25,3 +19,7 @@ export const getTickers = () =>
       dispatch(getTickersData(response));
     });
   };
+export const getToCart = (selectTicker) => ({
+  type: GET_CART,
+  payload: selectTicker,
+});

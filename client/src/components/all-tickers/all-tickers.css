@@ -1,0 +1,94 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.dark {
+  height: 110vh;
+  background-color: indigo;
+}
+.dark .tickers_box,
+.dark .tikers_wrapper,
+.dark .cart_wrapper {
+  box-shadow: 0 0 10px white;
+}
+
+.dark .tickers_box {
+  background-color: cadetblue;
+}
+.dark h1,
+.dark h2,
+.dark .wishlist_ticker {
+  color: white;
+}
+
+.all_tickers {
+  padding-top: 40px;
+}
+.all_tickers h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  text-transform: capitalize;
+}
+
+.tickers_box {
+  transition: 0.5s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 20px;
+}
+.tickers_box:hover {
+  transform: scale(1.1);
+}
+
+.red_color {
+  position: relative;
+  background-color: rgb(238, 184, 184);
+  border: 1px solid red;
+}
+.green_color {
+  position: relative;
+  background-color: rgb(186, 227, 183);
+  border: 1px solid green;
+}
+.green_color:after {
+  content: "↑";
+  color: green;
+  position: absolute;
+  right: 5px;
+}
+.red_color:after {
+  content: "	↓";
+  color: red;
+  position: absolute;
+  right: 5px;
+}
+.sort {
+  margin: 40px 0;
+}
+.sort select {
+  padding: 5px 10px;
+}
+
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
+}
+.yellow {
+  color: rgb(182, 182, 43);
+}
+.green {
+  color: green;
+}
+.tickers_title {
+  text-align: center;
+  margin-bottom: 40px;
+}

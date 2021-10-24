@@ -1,0 +1,25 @@
+header {
+  padding: 7px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: aliceblue;
+  border-bottom: 1px solid black;
+  box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.2);
+}
+.App-logo {
+  width: 70px;
+  height: 70px;
+}
+.dark header {
+  background-color: rgb(42, 53, 21);
+}
+
+.theme_color_wrapper img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+.theme_color_wrapper input {
+  cursor: pointer;
+}

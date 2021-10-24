@@ -1,0 +1,28 @@
+.btn-success {
+  width: 90px;
+  height: 100%;
+}
+[data-tooltip] {
+  position: relative;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  width: 100%;
+  top: 0;
+  margin-left: -150px;
+  background: #3989c9;
+  color: #fff;
+  padding: 3px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.5s;
+}
+[data-tooltip]:hover::after {
+  opacity: 1;
+  top: 10px;
+}
+.btn.btn-danger {
+  margin-left: 10px;
+}

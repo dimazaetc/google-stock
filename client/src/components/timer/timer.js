@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { socket } from "../../redux/get-socket";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
-import { socket } from "../redux/getSocket";
+import "./timer.css";
 
 const Timer = () => {
   const [value, setValue] = useState("");
@@ -20,7 +21,7 @@ const Timer = () => {
       socket.emit("getNewTimer", value * 1000);
       setTypeError("success");
     }
-    setTimeout(clearClass, 5000);
+    setTimeout(clearClass, 4000);
   };
 
   return (
@@ -35,7 +36,6 @@ const Timer = () => {
           Accept
         </Button>
       </InputGroup>
-      <div>{}</div>
     </div>
   );
 };

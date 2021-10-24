@@ -1,4 +1,4 @@
-import { GET_CART } from "./const";
+import { GET_CART } from "../const";
 const initialState = {
   cart: [],
 };

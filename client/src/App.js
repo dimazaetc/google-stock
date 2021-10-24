@@ -1,8 +1,8 @@
-import Header from "./header/header";
+import Header from "./components/header";
 import { React, useState } from "react";
-import AllTikers from "./components/allTikers";
+import AllTikers from "./components/all-tickers";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { store } from "./redux/store/store";
 function App() {
   let themeColor = [];
 
